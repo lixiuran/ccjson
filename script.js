@@ -305,6 +305,15 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initLanguage();
     initStorage();
+
+    // 恢复行号偏好，默认关闭
+    const savedShowLineNumbers = localStorage.getItem('showLineNumbers');
+    if (savedShowLineNumbers !== null) {
+        showLineNumbers.checked = savedShowLineNumbers === 'true';
+    } else {
+        showLineNumbers.checked = false;
+    }
+
     loadFromStorage();
     updateStats();
     updateLineNumbers();
@@ -531,6 +540,8 @@ showLineNumbers.addEventListener('change', () => {
             treeView.style.left = '0';
         }
     }
+    // 持久化偏好
+    localStorage.setItem('showLineNumbers', showLineNumbers.checked);
 });
 
 // 字体大小
