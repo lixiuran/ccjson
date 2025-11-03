@@ -32,11 +32,250 @@ const historyBtn = document.getElementById('historyBtn');
 const historyPanel = document.getElementById('historyPanel');
 const historyList = document.getElementById('historyList');
 const closeHistoryBtn = document.getElementById('closeHistoryBtn');
+const langToggle = document.getElementById('langToggle');
+const langToggleText = document.getElementById('langToggleText');
 
 // 状态变量
 let isTreeViewMode = false;
 let currentIndent = 2;
 let currentFontSize = 14;
+let currentLang = 'zh'; // 'zh' 或 'en'
+
+// 语言包
+const translations = {
+    zh: {
+        title: 'JSON 在线解析工具',
+        subtitle: '快速解析、格式化、验证和转换 JSON 数据 - 支持JSON转XML、JSON转YAML、树形编辑、编程语言转换等功能',
+        'btn.format': '格式化',
+        'btn.compress': '压缩',
+        'btn.validate': '验证',
+        'btn.escape': '转义',
+        'btn.unescape': '反转义',
+        'btn.unicode': '中文→Unicode',
+        'btn.unicodeBack': 'Unicode→中文',
+        'btn.getParam': '转Get参数',
+        'btn.dictJson': 'Dict↔Json',
+        'btn.example': 'Demo',
+        'btn.history': '历史',
+        'btn.clear': '清空',
+        'btn.copy': '复制',
+        'btn.treeView': '树形编辑',
+        'btn.treeEdit': '文本编辑',
+        'output.title': '输出结果',
+        'langConvert.placeholder': '编程语言转换',
+        'label.lineNumbers': '行号',
+        'label.indent': '空格：',
+        'label.fontSize': '字体：',
+        'placeholder.input': '在此输入或粘贴 JSON 数据...',
+        'info.charCount': '字符数：',
+        'info.lineCount': '行数：',
+        'info.status': '状态：',
+        'status.ready': '就绪',
+        'status.valid': '有效 JSON',
+        'status.error': '错误',
+        'status.success': '成功',
+        'storage.none': '不记录',
+        'storage.24h': '24小时',
+        'storage.7d': '7天',
+        'storage.30d': '30天',
+        'storage.forever': '永久',
+        'error.noInput': '请输入 JSON 数据',
+        'error.noOutput': '没有可复制的内容',
+        'error.invalidJSON': 'JSON 解析错误',
+        'success.formatted': '格式化成功',
+        'success.compressed': '压缩成功',
+        'success.escaped': '转义成功',
+        'success.unescaped': '反转义成功',
+        'success.converted': '转换成功',
+        'success.copied': '已复制到剪贴板',
+        'success.treeView': '树形视图已显示',
+        'confirm.clear': '确定要清空所有内容吗？',
+        'history.title': '浏览历史',
+        'history.empty': '暂无历史记录',
+        'features.title': 'JSON在线解析工具 - 功能特性',
+        'features.subtitle': '核心功能',
+        'features.format.name': 'JSON格式化',
+        'features.format.desc': '自动美化JSON数据，提高可读性，支持1-4空格缩进',
+        'features.compress.name': 'JSON压缩',
+        'features.compress.desc': '去除所有空格和换行，生成最紧凑的JSON格式',
+        'features.validate.name': 'JSON验证',
+        'features.validate.desc': '实时验证JSON语法，显示详细错误信息和位置',
+        'features.escape.name': 'JSON转义/反转义',
+        'features.escape.desc': '处理JSON字符串中的特殊字符转义',
+        'features.tree.name': '树形编辑',
+        'features.tree.desc': '可视化JSON树形结构，支持折叠和展开节点',
+        'features.langConvert.name': '编程语言转换',
+        'features.langConvert.desc': '支持将JSON转换为Java、Python、TypeScript、Go、Rust、Swift、C++、C#、Kotlin、PHP等代码',
+        'features.formatConvert.name': '格式转换',
+        'features.formatConvert.desc': '支持JSON转XML、JSON转YAML、JSON转CSV等多种格式',
+        'features.unicode.name': 'Unicode转换',
+        'features.unicode.desc': '中文与Unicode编码互转',
+        'features.getParam.name': 'Get参数转换',
+        'features.getParam.desc': 'JSON与URL Get参数格式互转',
+        'features.stats.name': '实时统计',
+        'features.stats.desc': '显示字符数、行数和验证状态',
+        'features.history.name': '历史记录',
+        'features.history.desc': '自动保存操作历史，支持7天/30天/永久存储',
+        'features.theme.name': '深色主题',
+        'features.theme.desc': '支持浅色和深色主题切换'
+    },
+    en: {
+        title: 'JSON Online Parser',
+        subtitle: 'Quickly parse, format, validate and convert JSON data - Supports JSON to XML, JSON to YAML, tree editing, programming language conversion and more',
+        'btn.format': 'Format',
+        'btn.compress': 'Compress',
+        'btn.validate': 'Validate',
+        'btn.escape': 'Escape',
+        'btn.unescape': 'Unescape',
+        'btn.unicode': 'Chinese→Unicode',
+        'btn.unicodeBack': 'Unicode→Chinese',
+        'btn.getParam': 'To Get Param',
+        'btn.dictJson': 'Dict↔Json',
+        'btn.example': 'Demo',
+        'btn.history': 'History',
+        'btn.clear': 'Clear',
+        'btn.copy': 'Copy',
+        'btn.treeView': 'Tree View',
+        'btn.treeEdit': 'Text Edit',
+        'output.title': 'Output',
+        'langConvert.placeholder': 'Language Convert',
+        'label.lineNumbers': 'Line Numbers',
+        'label.indent': 'Indent:',
+        'label.fontSize': 'Font:',
+        'placeholder.input': 'Enter or paste JSON data here...',
+        'info.charCount': 'Characters:',
+        'info.lineCount': 'Lines:',
+        'info.status': 'Status:',
+        'status.ready': 'Ready',
+        'status.valid': 'Valid JSON',
+        'status.error': 'Error',
+        'status.success': 'Success',
+        'storage.none': 'None',
+        'storage.24h': '24 Hours',
+        'storage.7d': '7 Days',
+        'storage.30d': '30 Days',
+        'storage.forever': 'Forever',
+        'error.noInput': 'Please enter JSON data',
+        'error.noOutput': 'No content to copy',
+        'error.invalidJSON': 'JSON parsing error',
+        'success.formatted': 'Formatted successfully',
+        'success.compressed': 'Compressed successfully',
+        'success.escaped': 'Escaped successfully',
+        'success.unescaped': 'Unescaped successfully',
+        'success.converted': 'Converted successfully',
+        'success.copied': 'Copied to clipboard',
+        'success.treeView': 'Tree view displayed',
+        'confirm.clear': 'Are you sure you want to clear all content?',
+        'history.title': 'History',
+        'history.empty': 'No history yet',
+        'features.title': 'JSON Online Parser - Features',
+        'features.subtitle': 'Core Features',
+        'features.format.name': 'JSON Formatting',
+        'features.format.desc': 'Automatically beautify JSON data for better readability, supports 1-4 space indentation',
+        'features.compress.name': 'JSON Compression',
+        'features.compress.desc': 'Remove all spaces and line breaks to generate the most compact JSON format',
+        'features.validate.name': 'JSON Validation',
+        'features.validate.desc': 'Real-time JSON syntax validation with detailed error information and location',
+        'features.escape.name': 'JSON Escape/Unescape',
+        'features.escape.desc': 'Handle special character escaping in JSON strings',
+        'features.tree.name': 'Tree Editing',
+        'features.tree.desc': 'Visualize JSON tree structure with collapsible and expandable nodes',
+        'features.langConvert.name': 'Programming Language Conversion',
+        'features.langConvert.desc': 'Convert JSON to Java, Python, TypeScript, Go, Rust, Swift, C++, C#, Kotlin, PHP code and more',
+        'features.formatConvert.name': 'Format Conversion',
+        'features.formatConvert.desc': 'Support JSON to XML, JSON to YAML, JSON to CSV and other formats',
+        'features.unicode.name': 'Unicode Conversion',
+        'features.unicode.desc': 'Chinese and Unicode encoding conversion',
+        'features.getParam.name': 'Get Parameter Conversion',
+        'features.getParam.desc': 'Convert between JSON and URL Get parameter format',
+        'features.stats.name': 'Real-time Statistics',
+        'features.stats.desc': 'Display character count, line count and validation status',
+        'features.history.name': 'History',
+        'features.history.desc': 'Automatically save operation history, supports 7 days/30 days/permanent storage',
+        'features.theme.name': 'Dark Theme',
+        'features.theme.desc': 'Support light and dark theme switching'
+    }
+};
+
+// 翻译函数
+function t(key) {
+    return translations[currentLang][key] || key;
+}
+
+// 应用语言
+function applyLanguage() {
+    // 更新所有带有 data-lang-key 的元素
+    document.querySelectorAll('[data-lang-key]').forEach(element => {
+        const key = element.getAttribute('data-lang-key');
+        const translation = t(key);
+        
+        if (element.tagName === 'INPUT') {
+            if (element.type === 'text' || element.type === 'search') {
+                element.placeholder = translation;
+            } else {
+                element.textContent = translation;
+            }
+        } else if (element.tagName === 'TEXTAREA') {
+            element.placeholder = translation;
+        } else if (element.tagName === 'OPTION') {
+            element.textContent = translation;
+        } else if (element.tagName === 'STRONG' || element.tagName === 'SPAN') {
+            // Strong 和 Span 直接更新文本
+            element.textContent = translation;
+        } else if (element.tagName === 'BUTTON' || element.tagName === 'H1' || element.tagName === 'H2' || element.tagName === 'H3' || element.tagName === 'P') {
+            element.textContent = translation;
+        } else {
+            element.textContent = translation;
+        }
+    });
+    
+    // 更新语言切换按钮文本
+    if (langToggleText) {
+        langToggleText.textContent = currentLang === 'zh' ? 'EN' : '中文';
+    }
+    
+    // 更新文档语言
+    document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+    
+    // 更新title标签
+    if (currentLang === 'zh') {
+        document.title = 'JSON 在线解析工具 - 免费JSON格式化、验证、转换工具 | JSON在线解析';
+    } else {
+        document.title = 'JSON Online Parser - Free JSON Format, Validate & Convert Tool';
+    }
+    
+    // 保存语言选择
+    localStorage.setItem('jsonToolLanguage', currentLang);
+}
+
+// 初始化语言
+function initLanguage() {
+    const savedLang = localStorage.getItem('jsonToolLanguage') || 'zh';
+    currentLang = savedLang;
+    applyLanguage();
+}
+
+// 切换语言
+function toggleLanguage() {
+    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    applyLanguage();
+    
+    // 更新状态文本（如果当前有状态）
+    if (status.hasAttribute('data-lang-key')) {
+        const key = status.getAttribute('data-lang-key');
+        status.textContent = t(key);
+    }
+    
+    // 更新树形视图按钮（如果可见）
+    if (treeViewBtn) {
+        updateTreeViewButton();
+    }
+    
+    // 如果历史面板打开，重新加载以更新时间格式
+    if (historyPanel.style.display !== 'none') {
+        loadHistory();
+    }
+}
 
 // 示例 JSON 数据
 const exampleJson = {
@@ -64,6 +303,7 @@ const exampleJson = {
 // 初始化
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    initLanguage();
     initStorage();
     loadFromStorage();
     updateStats();
@@ -101,6 +341,11 @@ function initTheme() {
     const savedTheme = localStorage.getItem('jsonToolTheme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
 }
+
+// 语言切换
+langToggle.addEventListener('click', () => {
+    toggleLanguage();
+});
 
 themeToggle.addEventListener('click', () => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -191,7 +436,7 @@ function loadHistory() {
     historyList.innerHTML = '';
 
     if (history.length === 0) {
-        historyList.innerHTML = '<div style="text-align: center; padding: 20px; color: #999;">暂无历史记录</div>';
+        historyList.innerHTML = `<div style="text-align: center; padding: 20px; color: #999;">${t('history.empty')}</div>`;
         return;
     }
 
@@ -199,7 +444,8 @@ function loadHistory() {
         const div = document.createElement('div');
         div.className = 'history-item';
         
-        const time = new Date(item.timestamp).toLocaleString('zh-CN');
+        const locale = currentLang === 'zh' ? 'zh-CN' : 'en-US';
+        const time = new Date(item.timestamp).toLocaleString(locale);
         const preview = item.content.substring(0, 200);
         
         div.innerHTML = `
@@ -328,23 +574,30 @@ function updateStats() {
 function clearError() {
     errorMessage.classList.remove('show');
     errorMessage.textContent = '';
-    status.textContent = '就绪';
+    status.textContent = t('status.ready');
     status.className = 'status-valid';
+    status.setAttribute('data-lang-key', 'status.ready');
 }
 
 // 显示错误信息
-function showError(message) {
-    errorMessage.textContent = message;
+function showError(message, useTranslation = false) {
+    const errorMsg = useTranslation ? t(message) : message;
+    errorMessage.textContent = errorMsg;
     errorMessage.classList.add('show');
-    status.textContent = '错误';
+    status.textContent = t('status.error');
     status.className = 'status-invalid';
+    status.removeAttribute('data-lang-key');
 }
 
 // 显示成功状态
-function showSuccess(message = '成功') {
+function showSuccess(message = 'status.success', useTranslation = true) {
     clearError();
-    status.textContent = message;
+    const successMsg = useTranslation ? t(message) : message;
+    status.textContent = successMsg;
     status.className = 'status-valid';
+    if (useTranslation) {
+        status.setAttribute('data-lang-key', message);
+    }
 }
 
 // 解析 JSON
@@ -352,7 +605,8 @@ function parseJSON(text) {
     try {
         return JSON.parse(text);
     } catch (error) {
-        throw new Error(`JSON 解析错误: ${error.message}`);
+        const errorPrefix = currentLang === 'zh' ? 'JSON 解析错误' : 'JSON parsing error';
+        throw new Error(`${errorPrefix}: ${error.message}`);
     }
 }
 
@@ -360,7 +614,7 @@ function parseJSON(text) {
 function formatJSON() {
     const text = jsonInput.value.trim();
     if (!text) {
-        showError('请输入 JSON 数据');
+        showError('error.noInput', true);
         return;
     }
     
@@ -369,7 +623,7 @@ function formatJSON() {
         const formatted = JSON.stringify(obj, null, currentIndent);
         jsonOutput.value = formatted;
         updateLineNumbers();
-        showSuccess('格式化成功');
+        showSuccess('success.formatted');
         addToHistory(formatted);
     } catch (error) {
         showError(error.message);
@@ -381,7 +635,7 @@ function formatJSON() {
 function compressJSON() {
     const text = jsonInput.value.trim();
     if (!text) {
-        showError('请输入 JSON 数据');
+        showError('error.noInput', true);
         return;
     }
     
@@ -390,7 +644,7 @@ function compressJSON() {
         const compressed = JSON.stringify(obj);
         jsonOutput.value = compressed;
         updateLineNumbers();
-        showSuccess('压缩成功');
+        showSuccess('success.compressed');
         addToHistory(compressed);
     } catch (error) {
         showError(error.message);
@@ -461,7 +715,7 @@ function renderTreeView(obj, container, level = 0) {
 function showTreeView() {
     const text = jsonInput.value.trim();
     if (!text) {
-        showError('请输入 JSON 数据');
+        showError('error.noInput', true);
         return;
     }
 
@@ -478,13 +732,19 @@ function showTreeView() {
             treeView.style.left = '0';
         }
         isTreeViewMode = true;
-        showSuccess('树形视图已显示');
+        showSuccess('success.treeView');
+        updateTreeViewButton();
     } catch (error) {
         showError(error.message);
         treeView.style.display = 'none';
         jsonOutput.style.visibility = 'visible';
         isTreeViewMode = false;
+        updateTreeViewButton();
     }
+}
+
+function updateTreeViewButton() {
+    treeViewBtn.textContent = isTreeViewMode ? t('btn.treeEdit') : t('btn.treeView');
 }
 
 treeViewBtn.addEventListener('click', () => {
@@ -493,14 +753,13 @@ treeViewBtn.addEventListener('click', () => {
         treeView.style.display = 'none';
         jsonOutput.style.visibility = 'visible';
         isTreeViewMode = false;
-        treeViewBtn.textContent = '树形编辑';
+        updateTreeViewButton();
         // 重新启用编程语言转换
         langConvert.disabled = false;
         langConvert.value = '';
     } else {
         // 切换到树形编辑
         showTreeView();
-        treeViewBtn.textContent = '文本编辑';
         // 禁用编程语言转换
         langConvert.disabled = true;
         langConvert.value = '';
@@ -511,7 +770,7 @@ treeViewBtn.addEventListener('click', () => {
 function escapeJSON() {
     const text = jsonInput.value.trim();
     if (!text) {
-        showError('请输入 JSON 数据');
+        showError('error.noInput', true);
         return;
     }
     
@@ -525,7 +784,7 @@ function escapeJSON() {
                         .replace(/\t/g, '\\t');
         jsonOutput.value = escaped;
         updateLineNumbers();
-        showSuccess('转义成功');
+        showSuccess('success.escaped');
         addToHistory(escaped);
     } catch (error) {
         showError(error.message);
@@ -536,7 +795,7 @@ function escapeJSON() {
 function unescapeJSON() {
     const text = jsonInput.value.trim();
     if (!text) {
-        showError('请输入需要反转义的文本');
+        showError('error.noInput', true);
         return;
     }
     
@@ -551,10 +810,10 @@ function unescapeJSON() {
         const formatted = JSON.stringify(obj, null, currentIndent);
         jsonOutput.value = formatted;
         updateLineNumbers();
-        showSuccess('反转义成功');
+        showSuccess('success.unescaped');
         addToHistory(formatted);
     } catch (error) {
-        showError('反转义失败: ' + error.message);
+        showError(error.message);
         jsonOutput.value = '';
     }
 }
@@ -573,7 +832,7 @@ function toUnicode() {
     }
     jsonOutput.value = result;
     updateLineNumbers();
-    showSuccess('转换成功');
+    showSuccess('success.converted');
     addToHistory(result);
 }
 
@@ -584,7 +843,7 @@ function fromUnicode() {
     });
     jsonOutput.value = result;
     updateLineNumbers();
-    showSuccess('转换成功');
+    showSuccess('success.converted');
     addToHistory(result);
 }
 
@@ -592,7 +851,7 @@ function fromUnicode() {
 function toGetParams() {
     const text = jsonInput.value.trim();
     if (!text) {
-        showError('请输入 JSON 数据');
+        showError('error.noInput', true);
         return;
     }
     
@@ -621,7 +880,7 @@ function toGetParams() {
         const result = params.toString();
         jsonOutput.value = result;
         updateLineNumbers();
-        showSuccess('转换成功');
+        showSuccess('success.converted');
         addToHistory(result);
     } catch (error) {
         showError(error.message);
@@ -633,7 +892,7 @@ function toGetParams() {
 function dictJsonConvert() {
     const text = jsonInput.value.trim();
     if (!text) {
-        showError('请输入数据');
+        showError('error.noInput', true);
         return;
     }
     
@@ -646,35 +905,35 @@ function dictJsonConvert() {
             .replace(/true/g, 'True')
             .replace(/false/g, 'False')
             .replace(/null/g, 'None');
-        jsonOutput.value = dictStr;
-        updateLineNumbers();
-        showSuccess('转换成功');
-        addToHistory(dictStr);
-    } catch (error) {
-        // 尝试解析为 Python dict
-        try {
-            const dictStr = text.replace(/'/g, '"')
+            jsonOutput.value = dictStr;
+            updateLineNumbers();
+            showSuccess('success.converted');
+            addToHistory(dictStr);
+        } catch (error) {
+            // 尝试解析为 Python dict
+            try {
+                const dictStr = text.replace(/'/g, '"')
                                .replace(/True/g, 'true')
                                .replace(/False/g, 'false')
                                .replace(/None/g, 'null');
-            const obj = parseJSON(dictStr);
-            const jsonStr = JSON.stringify(obj, null, currentIndent);
-            jsonOutput.value = jsonStr;
-            updateLineNumbers();
-            showSuccess('转换成功');
-            addToHistory(jsonStr);
-        } catch (e) {
-            showError('无法识别格式');
-            jsonOutput.value = '';
+                const obj = parseJSON(dictStr);
+                const jsonStr = JSON.stringify(obj, null, currentIndent);
+                jsonOutput.value = jsonStr;
+                updateLineNumbers();
+                showSuccess('success.converted');
+                addToHistory(jsonStr);
+            } catch (e) {
+                showError('error.invalidJSON', true);
+                jsonOutput.value = '';
+            }
         }
     }
-}
 
 // 编程语言转换
 function convertToLanguage(lang) {
     const text = jsonInput.value.trim();
     if (!text) {
-        showError('请输入 JSON 数据');
+        showError('error.noInput', true);
         return;
     }
     
@@ -714,13 +973,13 @@ function convertToLanguage(lang) {
                 result = generatePHPClass(obj);
                 break;
             default:
-                showError('不支持的编程语言');
+                showError('error.invalidJSON', true);
                 return;
         }
         
         jsonOutput.value = result;
         updateLineNumbers();
-        showSuccess('转换成功');
+        showSuccess('success.converted');
         addToHistory(result);
     } catch (error) {
         showError(error.message);
@@ -1000,12 +1259,12 @@ function escapeHtml(text) {
 function validateJSON() {
     const text = jsonInput.value.trim();
     if (!text) {
-        showError('请输入 JSON 数据');
+        showError('error.noInput', true);
         return;
     }
     try {
         parseJSON(text);
-        showSuccess('有效 JSON');
+        showSuccess('status.valid');
         return true;
     } catch (error) {
         showError(error.message);
@@ -1027,10 +1286,10 @@ function autoValidate() {
 async function copyToClipboard(text) {
     try {
         await navigator.clipboard.writeText(text);
-        showSuccess('已复制到剪贴板');
+        showSuccess('success.copied');
         
         const originalText = copyBtn.textContent;
-        copyBtn.textContent = '已复制!';
+        copyBtn.textContent = currentLang === 'zh' ? '已复制!' : 'Copied!';
         setTimeout(() => {
             copyBtn.textContent = originalText;
         }, 2000);
@@ -1043,9 +1302,9 @@ async function copyToClipboard(text) {
         textarea.select();
         try {
             document.execCommand('copy');
-            showSuccess('已复制到剪贴板');
+            showSuccess('success.copied');
         } catch (err) {
-            showError('复制失败，请手动复制');
+            showError('error.noOutput', true);
         }
         document.body.removeChild(textarea);
     }
@@ -1094,7 +1353,7 @@ compressBtn.addEventListener('click', compressJSON);
 escapeBtn.addEventListener('click', escapeJSON);
 unescapeBtn.addEventListener('click', unescapeJSON);
 clearBtn.addEventListener('click', () => {
-    if (confirm('确定要清空所有内容吗？')) {
+    if (confirm(t('confirm.clear'))) {
         jsonInput.value = '';
         jsonOutput.value = '';
         treeView.innerHTML = '';
@@ -1112,14 +1371,14 @@ exampleBtn.addEventListener('click', () => {
     updateLineNumbers();
     validateJSON();
     formatJSON();
-    showSuccess('已加载示例数据');
+    showSuccess('success.converted');
     saveToStorage();
 });
 validateBtn.addEventListener('click', validateJSON);
 copyBtn.addEventListener('click', () => {
     const text = jsonOutput.value;
     if (!text) {
-        showError('没有可复制的内容');
+        showError('error.noOutput', true);
         return;
     }
     copyToClipboard(text);
@@ -1127,7 +1386,7 @@ copyBtn.addEventListener('click', () => {
 copyInputBtn.addEventListener('click', () => {
     const text = jsonInput.value;
     if (!text) {
-        showError('没有可复制的内容');
+        showError('error.noOutput', true);
         return;
     }
     copyToClipboard(text);
@@ -1140,7 +1399,7 @@ langConvert.addEventListener('change', (e) => {
             treeView.style.display = 'none';
             jsonOutput.style.visibility = 'visible';
             isTreeViewMode = false;
-            treeViewBtn.textContent = '树形编辑';
+            updateTreeViewButton();
             langConvert.disabled = false;
         }
         // 执行语言转换

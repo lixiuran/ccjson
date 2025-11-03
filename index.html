@@ -20,7 +20,7 @@
     <meta name="twitter:description" content="免费在线JSON解析工具，支持JSON格式化、压缩、验证、转义、树形编辑、编程语言转换等功能。">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://json.example.com/">
+    <link rel="canonical" href="https://ccjson.com/">
     
     <title>JSON 在线解析工具 - 免费JSON格式化、验证、转换工具 | JSON在线解析</title>
     <link rel="stylesheet" href="style.css">
@@ -32,7 +32,7 @@
         "@type": "WebApplication",
         "name": "JSON 在线解析工具",
         "description": "免费在线JSON解析工具，支持JSON格式化、压缩、验证、转义、树形编辑、编程语言转换等功能",
-        "url": "https://json.example.com/",
+        "url": "https://ccjson.com/",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -57,21 +57,24 @@
     <div class="container">
         <header>
             <div class="header-top">
-                <h1>JSON 在线解析工具</h1>
+                <h1 data-lang-key="title">JSON 在线解析工具</h1>
                 <div class="header-controls">
+                    <button id="langToggle" class="btn-icon" title="切换语言" aria-label="切换语言">
+                        <span id="langToggleText">EN</span>
+                    </button>
                     <button id="themeToggle" class="btn-icon" title="切换主题" aria-label="切换主题">
                         <span>🌓</span>
                     </button>
                     <select id="storageDuration" class="select-small" aria-label="数据存储时长">
-                        <option value="none">不记录</option>
-                        <option value="24h">24小时</option>
-                        <option value="7d" selected>7天</option>
-                        <option value="30d">30天</option>
-                        <option value="forever">永久</option>
+                        <option value="none" data-lang-key="storage.none">不记录</option>
+                        <option value="24h" data-lang-key="storage.24h">24小时</option>
+                        <option value="7d" selected data-lang-key="storage.7d">7天</option>
+                        <option value="30d" data-lang-key="storage.30d">30天</option>
+                        <option value="forever" data-lang-key="storage.forever">永久</option>
                     </select>
                 </div>
             </div>
-            <p class="subtitle">快速解析、格式化、验证和转换 JSON 数据 - 支持JSON转XML、JSON转YAML、树形编辑、编程语言转换等功能</p>
+            <p class="subtitle" data-lang-key="subtitle">快速解析、格式化、验证和转换 JSON 数据 - 支持JSON转XML、JSON转YAML、树形编辑、编程语言转换等功能</p>
         </header>
 
         <div class="main-content">
@@ -79,45 +82,45 @@
                 <div class="section-header">
                     <div class="section-toolbar" role="toolbar" aria-label="输入区域工具栏">
                         <div class="toolbar-group-inline">
-                            <button id="formatBtn" class="btn btn-small btn-primary" aria-label="格式化JSON">格式化</button>
-                            <button id="compressBtn" class="btn btn-small btn-secondary" aria-label="压缩JSON">压缩</button>
+                            <button id="formatBtn" class="btn btn-small btn-primary" data-lang-key="btn.format">格式化</button>
+                            <button id="compressBtn" class="btn btn-small btn-secondary" data-lang-key="btn.compress">压缩</button>
                         </div>
                         <div class="toolbar-group-inline">
-                            <button id="validateBtn" class="btn btn-small" aria-label="验证JSON格式">验证</button>
-                            <button id="escapeBtn" class="btn btn-small" aria-label="添加转义">转义</button>
-                            <button id="unescapeBtn" class="btn btn-small" aria-label="去除转义">反转义</button>
+                            <button id="validateBtn" class="btn btn-small" data-lang-key="btn.validate">验证</button>
+                            <button id="escapeBtn" class="btn btn-small" data-lang-key="btn.escape">转义</button>
+                            <button id="unescapeBtn" class="btn btn-small" data-lang-key="btn.unescape">反转义</button>
                         </div>
                         <div class="toolbar-group-inline">
-                            <button id="unicodeBtn" class="btn btn-small" aria-label="中文转Unicode">中文→Unicode</button>
-                            <button id="unicodeBackBtn" class="btn btn-small" aria-label="Unicode转中文">Unicode→中文</button>
+                            <button id="unicodeBtn" class="btn btn-small" data-lang-key="btn.unicode">中文→Unicode</button>
+                            <button id="unicodeBackBtn" class="btn btn-small" data-lang-key="btn.unicodeBack">Unicode→中文</button>
                         </div>
                         <div class="toolbar-group-inline">
-                            <button id="getParamBtn" class="btn btn-small" aria-label="转换为GET参数">转Get参数</button>
-                            <button id="dictJsonBtn" class="btn btn-small" aria-label="Dict和JSON互转">Dict↔Json</button>
+                            <button id="getParamBtn" class="btn btn-small" data-lang-key="btn.getParam">转Get参数</button>
+                            <button id="dictJsonBtn" class="btn btn-small" data-lang-key="btn.dictJson">Dict↔Json</button>
                         </div>
                         <div class="toolbar-group-inline">
-                            <button id="exampleBtn" class="btn btn-small btn-info" aria-label="加载示例数据">Demo</button>
-                            <button id="historyBtn" class="btn btn-small" aria-label="查看历史记录">历史</button>
-                            <button id="clearBtn" class="btn btn-small btn-danger" aria-label="清空内容">清空</button>
-                            <button id="copyInputBtn" class="btn btn-small" aria-label="复制输入内容">复制</button>
+                            <button id="exampleBtn" class="btn btn-small btn-info" data-lang-key="btn.example">Demo</button>
+                            <button id="historyBtn" class="btn btn-small" data-lang-key="btn.history">历史</button>
+                            <button id="clearBtn" class="btn btn-small btn-danger" data-lang-key="btn.clear">清空</button>
+                            <button id="copyInputBtn" class="btn btn-small" data-lang-key="btn.copy">复制</button>
                         </div>
                     </div>
                 </div>
                 <div class="editor-wrapper">
                     <div id="lineNumbers" class="line-numbers" aria-hidden="true"></div>
-                    <textarea id="jsonInput" class="json-editor" placeholder="在此输入或粘贴 JSON 数据..." aria-label="JSON输入框"></textarea>
+                    <textarea id="jsonInput" class="json-editor" data-lang-key="placeholder.input" placeholder="在此输入或粘贴 JSON 数据..." aria-label="JSON输入框"></textarea>
                 </div>
                 <div id="errorMessage" class="error-message" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="output-section">
                 <div class="section-header">
-                    <h2>输出结果</h2>
+                    <h2 data-lang-key="output.title">输出结果</h2>
                     <div class="section-toolbar" role="toolbar" aria-label="输出区域工具栏">
                         <div class="toolbar-group-inline">
-                            <button id="treeViewBtn" class="btn btn-small btn-info" aria-label="切换树形视图">树形编辑</button>
+                            <button id="treeViewBtn" class="btn btn-small btn-info" data-lang-key="btn.treeView">树形编辑</button>
                             <select id="langConvert" class="select-small" aria-label="编程语言转换">
-                                <option value="">编程语言转换</option>
+                                <option value="" data-lang-key="langConvert.placeholder">编程语言转换</option>
                                 <option value="java">Java</option>
                                 <option value="python">Python</option>
                                 <option value="typescript">TypeScript</option>
@@ -133,17 +136,17 @@
                         <div class="toolbar-group-inline">
                             <label class="checkbox-label-inline">
                                 <input type="checkbox" id="showLineNumbers" checked aria-label="显示行号">
-                                <span>行号</span>
+                                <span data-lang-key="label.lineNumbers">行号</span>
                             </label>
                             <span class="toolbar-separator" aria-hidden="true">|</span>
-                            <span class="toolbar-label-small">空格：</span>
+                            <span class="toolbar-label-small" data-lang-key="label.indent">空格：</span>
                             <select id="indentSize" class="select-small" aria-label="缩进空格数">
                                 <option value="1">1</option>
                                 <option value="2" selected>2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                             </select>
-                            <span class="toolbar-label-small">字体：</span>
+                            <span class="toolbar-label-small" data-lang-key="label.fontSize">字体：</span>
                             <select id="fontSize" class="select-small" aria-label="字体大小">
                                 <option value="12">12px</option>
                                 <option value="13">13px</option>
@@ -155,7 +158,7 @@
                             </select>
                         </div>
                         <div class="toolbar-group-inline">
-                            <button id="copyBtn" class="btn btn-small" aria-label="复制输出结果">复制</button>
+                            <button id="copyBtn" class="btn btn-small" data-lang-key="btn.copy">复制</button>
                         </div>
                     </div>
                 </div>
@@ -169,37 +172,37 @@
 
         <aside class="info-panel" aria-label="统计信息">
             <div class="info-item">
-                <span class="info-label">字符数：</span>
+                <span class="info-label" data-lang-key="info.charCount">字符数：</span>
                 <span id="charCount" aria-live="polite">0</span>
             </div>
             <div class="info-item">
-                <span class="info-label">行数：</span>
+                <span class="info-label" data-lang-key="info.lineCount">行数：</span>
                 <span id="lineCount" aria-live="polite">0</span>
             </div>
             <div class="info-item">
-                <span class="info-label">状态：</span>
-                <span id="status" class="status-valid" aria-live="polite">就绪</span>
+                <span class="info-label" data-lang-key="info.status">状态：</span>
+                <span id="status" class="status-valid" aria-live="polite" data-lang-key="status.ready">就绪</span>
             </div>
         </aside>
         
         <!-- 功能说明 -->
         <section class="features-section" aria-label="功能特性">
-            <h2 class="features-title">JSON在线解析工具 - 功能特性</h2>
+            <h2 class="features-title" data-lang-key="features.title">JSON在线解析工具 - 功能特性</h2>
             <div class="features">
-                <h3>核心功能</h3>
+                <h3 data-lang-key="features.subtitle">核心功能</h3>
                 <ul>
-                    <li>✅ <strong>JSON格式化</strong> - 自动美化JSON数据，提高可读性，支持1-4空格缩进</li>
-                    <li>✅ <strong>JSON压缩</strong> - 去除所有空格和换行，生成最紧凑的JSON格式</li>
-                    <li>✅ <strong>JSON验证</strong> - 实时验证JSON语法，显示详细错误信息和位置</li>
-                    <li>✅ <strong>JSON转义/反转义</strong> - 处理JSON字符串中的特殊字符转义</li>
-                    <li>✅ <strong>树形编辑</strong> - 可视化JSON树形结构，支持折叠和展开节点</li>
-                    <li>✅ <strong>编程语言转换</strong> - 支持将JSON转换为Java、Python、TypeScript、Go、Rust、Swift、C++、C#、Kotlin、PHP等代码</li>
-                    <li>✅ <strong>格式转换</strong> - 支持JSON转XML、JSON转YAML、JSON转CSV等多种格式</li>
-                    <li>✅ <strong>Unicode转换</strong> - 中文与Unicode编码互转</li>
-                    <li>✅ <strong>Get参数转换</strong> - JSON与URL Get参数格式互转</li>
-                    <li>✅ <strong>实时统计</strong> - 显示字符数、行数和验证状态</li>
-                    <li>✅ <strong>历史记录</strong> - 自动保存操作历史，支持7天/30天/永久存储</li>
-                    <li>✅ <strong>深色主题</strong> - 支持浅色和深色主题切换</li>
+                    <li>✅ <strong data-lang-key="features.format.name">JSON格式化</strong> - <span data-lang-key="features.format.desc">自动美化JSON数据，提高可读性，支持1-4空格缩进</span></li>
+                    <li>✅ <strong data-lang-key="features.compress.name">JSON压缩</strong> - <span data-lang-key="features.compress.desc">去除所有空格和换行，生成最紧凑的JSON格式</span></li>
+                    <li>✅ <strong data-lang-key="features.validate.name">JSON验证</strong> - <span data-lang-key="features.validate.desc">实时验证JSON语法，显示详细错误信息和位置</span></li>
+                    <li>✅ <strong data-lang-key="features.escape.name">JSON转义/反转义</strong> - <span data-lang-key="features.escape.desc">处理JSON字符串中的特殊字符转义</span></li>
+                    <li>✅ <strong data-lang-key="features.tree.name">树形编辑</strong> - <span data-lang-key="features.tree.desc">可视化JSON树形结构，支持折叠和展开节点</span></li>
+                    <li>✅ <strong data-lang-key="features.langConvert.name">编程语言转换</strong> - <span data-lang-key="features.langConvert.desc">支持将JSON转换为Java、Python、TypeScript、Go、Rust、Swift、C++、C#、Kotlin、PHP等代码</span></li>
+                    <li>✅ <strong data-lang-key="features.formatConvert.name">格式转换</strong> - <span data-lang-key="features.formatConvert.desc">支持JSON转XML、JSON转YAML、JSON转CSV等多种格式</span></li>
+                    <li>✅ <strong data-lang-key="features.unicode.name">Unicode转换</strong> - <span data-lang-key="features.unicode.desc">中文与Unicode编码互转</span></li>
+                    <li>✅ <strong data-lang-key="features.getParam.name">Get参数转换</strong> - <span data-lang-key="features.getParam.desc">JSON与URL Get参数格式互转</span></li>
+                    <li>✅ <strong data-lang-key="features.stats.name">实时统计</strong> - <span data-lang-key="features.stats.desc">显示字符数、行数和验证状态</span></li>
+                    <li>✅ <strong data-lang-key="features.history.name">历史记录</strong> - <span data-lang-key="features.history.desc">自动保存操作历史，支持7天/30天/永久存储</span></li>
+                    <li>✅ <strong data-lang-key="features.theme.name">深色主题</strong> - <span data-lang-key="features.theme.desc">支持浅色和深色主题切换</span></li>
                 </ul>
             </div>
         </section>
@@ -207,7 +210,7 @@
         <!-- 历史记录面板 -->
         <div id="historyPanel" class="history-panel" style="display: none;">
             <div class="history-header">
-                <h3>浏览历史</h3>
+                <h3 data-lang-key="history.title">浏览历史</h3>
                 <button id="closeHistoryBtn" class="btn-icon">✕</button>
             </div>
             <div id="historyList" class="history-list"></div>
