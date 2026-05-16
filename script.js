@@ -226,39 +226,69 @@ function t(key) {
     return translations[currentLang][key] || key;
 }
 
-/** 各语言 SEO 文案，与 index.html head 中 meta 保持一致 */
-const seoMeta = {
+/** 各语言 SEO 文案（与 seo-init.js 共用 window.__jsonToolSeoMeta，此处作兜底） */
+const seoMeta = window.__jsonToolSeoMeta || {
     zh: {
         title: 'JSON 在线解析工具 - 免费JSON格式化、验证、转换工具 | JSON在线解析',
         description: '免费在线 JSON 解析工具：一键格式化、压缩、校验 JSON，支持转义、Unicode、Get 参数、Dict 互转、树形编辑及 Java/Python/TypeScript 等代码生成。无需安装，浏览器即用。',
+        keywords: 'json在线解析,json格式化,json压缩,json验证,json校验,json转义,json编辑器,json工具',
+        author: 'JSON在线解析工具',
         ogTitle: 'JSON 在线解析工具 - 免费JSON格式化、验证、转换工具',
-        ogDescription: '免费在线 JSON 解析工具：格式化、压缩、校验、转义、树形编辑与多语言代码转换，开发者必备的 JSON 在线工具。'
+        ogDescription: '免费在线 JSON 解析工具：格式化、压缩、校验、转义、树形编辑与多语言代码转换，开发者必备的 JSON 在线工具。',
+        siteName: 'JSON在线解析工具',
+        htmlLang: 'zh-CN',
+        ogLocale: 'zh_CN',
+        canonical: 'https://ccjson.com/'
     },
     en: {
         title: 'JSON Online Parser - Free JSON Format, Validate & Convert Tool',
         description: 'Free online JSON parser: format, compress, validate and escape JSON. Unicode, GET params, dict conversion, tree view, and code gen for Java, Python, TypeScript, and more.',
+        keywords: 'json parser,json formatter,json validator,json beautifier,json tools',
+        author: 'JSON Online Parser',
         ogTitle: 'JSON Online Parser - Free JSON Format, Validate & Convert Tool',
-        ogDescription: 'Free online JSON tools for formatting, validation, compression, escaping, tree editing, and multi-language code generation.'
+        ogDescription: 'Free online JSON tools for formatting, validation, compression, escaping, tree editing, and multi-language code generation.',
+        siteName: 'JSON Online Parser',
+        htmlLang: 'en',
+        ogLocale: 'en_US',
+        canonical: 'https://ccjson.com/?lang=en'
     }
 };
 
-/** 同步 title、description、Open Graph、Twitter 等 SEO 标签 */
+/** 同步 title、description、keywords、Open Graph、canonical 等 SEO 标签 */
 function updateSeoMeta() {
+    if (typeof window.__jsonToolApplySeoMeta === 'function') {
+        window.__jsonToolApplySeoMeta(currentLang);
+        return;
+    }
     const meta = seoMeta[currentLang] || seoMeta.zh;
+    document.documentElement.lang = meta.htmlLang || (currentLang === 'zh' ? 'zh-CN' : 'en');
     document.title = meta.title;
 
     const descEl = document.getElementById('metaDescription');
+    const kwEl = document.getElementById('metaKeywords');
+    const authorEl = document.getElementById('metaAuthor');
     if (descEl) descEl.setAttribute('content', meta.description);
+    if (kwEl) kwEl.setAttribute('content', meta.keywords);
+    if (authorEl) authorEl.setAttribute('content', meta.author);
 
     const ogTitle = document.getElementById('ogTitle');
     const ogDesc = document.getElementById('ogDescription');
+    const ogSite = document.getElementById('ogSiteName');
+    const ogLocale = document.getElementById('ogLocale');
+    const ogUrl = document.getElementById('ogUrl');
     if (ogTitle) ogTitle.setAttribute('content', meta.ogTitle);
     if (ogDesc) ogDesc.setAttribute('content', meta.ogDescription);
+    if (ogSite) ogSite.setAttribute('content', meta.siteName);
+    if (ogLocale) ogLocale.setAttribute('content', meta.ogLocale);
+    if (ogUrl) ogUrl.setAttribute('content', meta.canonical);
 
     const twTitle = document.getElementById('twitterTitle');
     const twDesc = document.getElementById('twitterDescription');
     if (twTitle) twTitle.setAttribute('content', meta.ogTitle);
     if (twDesc) twDesc.setAttribute('content', meta.ogDescription);
+
+    const canonical = document.getElementById('canonicalLink');
+    if (canonical) canonical.setAttribute('href', meta.canonical);
 }
 
 /** 将当前语言写入 URL（?lang=en），便于 hreflang 与分享链接 */
@@ -304,8 +334,7 @@ function applyLanguage() {
         langToggleText.textContent = currentLang === 'zh' ? 'EN' : '中文';
     }
     
-    // 更新文档语言与 SEO 相关标签
-    document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+    // 更新文档语言与 SEO 相关标签（title / description / keywords / OG 等）
     updateSeoMeta();
     syncLangToUrl();
 

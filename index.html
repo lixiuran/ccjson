@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- 基础 SEO：标题、描述、关键词（description 控制在约 160 字内利于摘要展示） -->
+    <!-- 基础 SEO：默认中文；英文由下方 seo-init.js 与 script.js 的 updateSeoMeta() 按语言切换 -->
     <title>JSON 在线解析工具 - 免费JSON格式化、验证、转换工具 | JSON在线解析</title>
     <meta id="metaDescription" name="description" content="免费在线 JSON 解析工具：一键格式化、压缩、校验 JSON，支持转义、Unicode、Get 参数、Dict 互转、树形编辑及 Java/Python/TypeScript 等代码生成。无需安装，浏览器即用。">
-    <meta name="keywords" content="json在线解析,json格式化,json压缩,json验证,json校验,json转义,json编辑器,json工具,json beautifier,json validator,json formatter,json转java,json转python,树形编辑,编程语言转换">
-    <meta name="author" content="JSON在线解析工具">
+    <meta id="metaKeywords" name="keywords" content="json在线解析,json格式化,json压缩,json验证,json校验,json转义,json编辑器,json工具,json beautifier,json validator,json formatter,json转java,json转python,树形编辑,编程语言转换">
+    <meta id="metaAuthor" name="author" content="JSON在线解析工具">
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
     <meta name="googlebot" content="index,follow">
     <meta name="bingbot" content="index,follow">
@@ -19,19 +19,19 @@
     <meta name="theme-color" content="#6dbf8a" media="(prefers-color-scheme: dark)">
 
     <!-- 规范链接与多语言（en 版通过 ?lang=en 区分，便于搜索引擎收录） -->
-    <link rel="canonical" href="https://ccjson.com/">
+    <link id="canonicalLink" rel="canonical" href="https://ccjson.com/">
     <link rel="alternate" hreflang="zh-CN" href="https://ccjson.com/">
     <link rel="alternate" hreflang="en" href="https://ccjson.com/?lang=en">
     <link rel="alternate" hreflang="x-default" href="https://ccjson.com/">
 
     <!-- Open Graph（社交分享） -->
     <meta property="og:type" content="website">
-    <meta property="og:locale" content="zh_CN">
+    <meta id="ogLocale" property="og:locale" content="zh_CN">
     <meta property="og:locale:alternate" content="en_US">
-    <meta property="og:url" content="https://ccjson.com/">
+    <meta id="ogUrl" property="og:url" content="https://ccjson.com/">
     <meta id="ogTitle" property="og:title" content="JSON 在线解析工具 - 免费JSON格式化、验证、转换工具">
     <meta id="ogDescription" property="og:description" content="免费在线 JSON 解析工具：格式化、压缩、校验、转义、树形编辑与多语言代码转换，开发者必备的 JSON 在线工具。">
-    <meta property="og:site_name" content="JSON在线解析工具">
+    <meta id="ogSiteName" property="og:site_name" content="JSON在线解析工具">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
@@ -44,6 +44,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- 尽早应用英文 SEO（?lang=en 或本地已选英文），避免标题/描述闪中文 -->
+    <script src="seo-init.js"></script>
     
     <!-- 结构化数据：WebSite + WebApplication + FAQ（利于富媒体摘要与功能展示） -->
     <script type="application/ld+json">
