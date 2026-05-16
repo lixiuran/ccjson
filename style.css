@@ -765,18 +765,11 @@ body {
 }
 
 .site-footer__icp {
-    margin-top: 6px;
-    font-size: 0.7rem;
-    color: var(--text-faint);
-    text-align: center;
-}
-
-.site-footer__icp a {
     color: var(--text-faint);
     text-decoration: none;
 }
 
-.site-footer__icp a:hover {
+.site-footer__icp:hover {
     color: var(--text-muted);
     text-decoration: underline;
 }
