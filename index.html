@@ -3,52 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="免费在线JSON解析工具，支持JSON格式化、压缩、验证、转义、树形编辑、编程语言转换等功能。快速解析和美化JSON数据，支持JSON转XML、JSON转YAML等多种格式转换。">
-    <meta name="keywords" content="json,json在线解析,json格式化,json格式验证,json转xml,xml转json,json压缩,json转义,js混淆加密,JSON转实体,json在线,JSON校验,json tools,JSON编辑器,树形编辑,编程语言转换,JSON转Java,JSON转Python,JSON转TypeScript">
-    <meta name="author" content="JSON在线解析工具">
-    <meta name="robots" content="index,follow">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="JSON 在线解析工具 - 免费JSON格式化、验证、转换工具">
-    <meta property="og:description" content="免费在线JSON解析工具，支持JSON格式化、压缩、验证、转义、树形编辑、编程语言转换等功能。">
-    <meta property="og:site_name" content="JSON在线解析工具">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="JSON 在线解析工具 - 免费JSON格式化、验证、转换工具">
-    <meta name="twitter:description" content="免费在线JSON解析工具，支持JSON格式化、压缩、验证、转义、树形编辑、编程语言转换等功能。">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://ccjson.com/">
-    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- 基础 SEO：标题、描述、关键词（description 控制在约 160 字内利于摘要展示） -->
     <title>JSON 在线解析工具 - 免费JSON格式化、验证、转换工具 | JSON在线解析</title>
+    <meta id="metaDescription" name="description" content="免费在线 JSON 解析工具：一键格式化、压缩、校验 JSON，支持转义、Unicode、Get 参数、Dict 互转、树形编辑及 Java/Python/TypeScript 等代码生成。无需安装，浏览器即用。">
+    <meta name="keywords" content="json在线解析,json格式化,json压缩,json验证,json校验,json转义,json编辑器,json工具,json beautifier,json validator,json formatter,json转java,json转python,树形编辑,编程语言转换">
+    <meta name="author" content="JSON在线解析工具">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+    <meta name="googlebot" content="index,follow">
+    <meta name="bingbot" content="index,follow">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#2f6b4f" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#6dbf8a" media="(prefers-color-scheme: dark)">
+
+    <!-- 规范链接与多语言（en 版通过 ?lang=en 区分，便于搜索引擎收录） -->
+    <link rel="canonical" href="https://ccjson.com/">
+    <link rel="alternate" hreflang="zh-CN" href="https://ccjson.com/">
+    <link rel="alternate" hreflang="en" href="https://ccjson.com/?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://ccjson.com/">
+
+    <!-- Open Graph（社交分享） -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:url" content="https://ccjson.com/">
+    <meta id="ogTitle" property="og:title" content="JSON 在线解析工具 - 免费JSON格式化、验证、转换工具">
+    <meta id="ogDescription" property="og:description" content="免费在线 JSON 解析工具：格式化、压缩、校验、转义、树形编辑与多语言代码转换，开发者必备的 JSON 在线工具。">
+    <meta property="og:site_name" content="JSON在线解析工具">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta id="twitterTitle" name="twitter:title" content="JSON 在线解析工具 - 免费JSON格式化、验证、转换工具">
+    <meta id="twitterDescription" name="twitter:description" content="免费在线 JSON 解析工具：格式化、压缩、校验、转义、树形编辑与多语言代码转换。">
+
+    <!-- 字体：标题用 Bricolage Grotesque，界面与代码分别用 Source Sans 3 / IBM Plex Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
     
-    <!-- 结构化数据 -->
+    <!-- 结构化数据：WebSite + WebApplication + FAQ（利于富媒体摘要与功能展示） -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "JSON 在线解析工具",
-        "description": "免费在线JSON解析工具，支持JSON格式化、压缩、验证、转义、树形编辑、编程语言转换等功能",
-        "url": "https://ccjson.com/",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "CNY"
-        },
-        "featureList": [
-            "JSON格式化",
-            "JSON压缩",
-            "JSON验证",
-            "JSON转义/反转义",
-            "树形编辑",
-            "编程语言转换",
-            "JSON转XML",
-            "JSON转YAML"
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://ccjson.com/#website",
+                "url": "https://ccjson.com/",
+                "name": "JSON 在线解析工具",
+                "description": "免费在线 JSON 格式化、校验、压缩与转换工具",
+                "inLanguage": ["zh-CN", "en"],
+                "publisher": { "@id": "https://ccjson.com/#organization" }
+            },
+            {
+                "@type": "Organization",
+                "@id": "https://ccjson.com/#organization",
+                "name": "JSON在线解析工具",
+                "url": "https://ccjson.com/"
+            },
+            {
+                "@type": "WebApplication",
+                "@id": "https://ccjson.com/#app",
+                "name": "JSON 在线解析工具",
+                "url": "https://ccjson.com/",
+                "description": "免费在线 JSON 解析工具，支持格式化、压缩、验证、转义、树形编辑、编程语言转换、Unicode 与 Get 参数互转",
+                "applicationCategory": "DeveloperApplication",
+                "operatingSystem": "Web Browser",
+                "browserRequirements": "Requires JavaScript",
+                "isAccessibleForFree": true,
+                "inLanguage": "zh-CN",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "CNY"
+                },
+                "featureList": [
+                    "JSON 格式化与压缩",
+                    "JSON 语法验证",
+                    "JSON 转义与反转义",
+                    "树形结构可视化编辑",
+                    "JSON 转 Java/Python/TypeScript/Go 等",
+                    "中文与 Unicode 互转",
+                    "JSON 与 URL Get 参数互转",
+                    "操作历史记录与本地存储"
+                ],
+                "publisher": { "@id": "https://ccjson.com/#organization" }
+            },
+            {
+                "@type": "FAQPage",
+                "@id": "https://ccjson.com/#faq",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "如何在线格式化 JSON？",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "将 JSON 粘贴到输入框，点击「格式化」即可自动缩进美化，可在输出区选择 1–4 空格缩进。"
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "如何验证 JSON 是否合法？",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "点击「验证」按钮，工具会实时检查语法并显示错误位置；输入时也会自动校验。"
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "支持将 JSON 转成编程语言代码吗？",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "支持。在输出区选择编程语言（如 Java、Python、TypeScript、Go、Rust 等），即可生成对应的数据类或结构体代码。"
+                        }
+                    }
+                ]
+            }
         ]
     }
     </script>
@@ -65,17 +139,42 @@
         
 </head>
 <body>
+    <!-- 无 JS 时的降级说明，便于爬虫与用户理解页面用途 -->
+    <noscript>
+        <p>JSON 在线解析工具需要启用 JavaScript。本页提供 JSON 格式化、压缩、验证、转义、树形编辑及多语言代码转换等功能。</p>
+    </noscript>
+
+    <div class="page-noise" aria-hidden="true"></div>
+
     <div class="container">
-        <header>
+        <header class="site-header">
             <div class="header-top">
-                <h1 data-lang-key="title">JSON 在线解析工具</h1>
+                <div class="brand">
+                    <!-- 品牌符号：花括号暗示 JSON 结构 -->
+                    <span class="brand-mark" aria-hidden="true">{ }</span>
+                    <div class="brand-text">
+                        <h1 data-lang-key="title">JSON 在线解析工具</h1>
+                        <p class="subtitle" data-lang-key="subtitle">快速解析、格式化、验证和转换 JSON 数据</p>
+                    </div>
+                </div>
                 <div class="header-controls">
                     <button id="langToggle" class="btn-icon" title="切换语言" aria-label="切换语言">
                         <span id="langToggleText">EN</span>
                     </button>
-                    <button id="themeToggle" class="btn-icon" title="切换主题" aria-label="切换主题">
-                        <span>🌓</span>
+                    <button id="themeToggle" class="btn-icon btn-theme" title="切换主题" aria-label="切换主题">
+                        <!-- 浅色模式显示月亮图标，深色模式显示太阳图标 -->
+                        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="5"/>
+                            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
                     </button>
+                    <label class="control-label" for="storageDuration" data-lang-key="label.storage">存储</label>
                     <select id="storageDuration" class="select-small" aria-label="数据存储时长">
                         <option value="none" data-lang-key="storage.none">不记录</option>
                         <option value="24h" data-lang-key="storage.24h">24小时</option>
@@ -85,14 +184,18 @@
                     </select>
                 </div>
             </div>
-            <p class="subtitle" data-lang-key="subtitle">快速解析、格式化、验证和转换 JSON 数据 - 支持JSON转XML、JSON转YAML、树形编辑、编程语言转换等功能</p>
         </header>
 
-        <div class="main-content">
-            <div class="input-section">
+        <main id="main-content" class="main-content">
+            <section class="input-section panel" aria-labelledby="input-heading">
                 <div class="section-header">
+                    <div class="panel-title-row">
+                        <span class="panel-badge panel-badge--input" data-lang-key="panel.input">输入</span>
+                        <h2 id="input-heading" class="panel-heading" data-lang-key="input.title">源数据</h2>
+                    </div>
                     <div class="section-toolbar" role="toolbar" aria-label="输入区域工具栏">
-                        <div class="toolbar-group-inline">
+                        <div class="toolbar-row">
+                        <div class="toolbar-group-inline toolbar-group--primary">
                             <button id="formatBtn" class="btn btn-small btn-primary" data-lang-key="btn.format">格式化</button>
                             <button id="compressBtn" class="btn btn-small btn-secondary" data-lang-key="btn.compress">压缩</button>
                         </div>
@@ -101,19 +204,24 @@
                             <button id="escapeBtn" class="btn btn-small" data-lang-key="btn.escape">转义</button>
                             <button id="unescapeBtn" class="btn btn-small" data-lang-key="btn.unescape">反转义</button>
                         </div>
+                        <div class="toolbar-divider" aria-hidden="true"></div>
                         <div class="toolbar-group-inline">
                             <button id="unicodeBtn" class="btn btn-small" data-lang-key="btn.unicode">中文→Unicode</button>
                             <button id="unicodeBackBtn" class="btn btn-small" data-lang-key="btn.unicodeBack">Unicode→中文</button>
                         </div>
+                        </div>
+                        <div class="toolbar-row">
                         <div class="toolbar-group-inline">
                             <button id="getParamBtn" class="btn btn-small" data-lang-key="btn.getParam">转Get参数</button>
                             <button id="dictJsonBtn" class="btn btn-small" data-lang-key="btn.dictJson">Dict↔Json</button>
                         </div>
-                        <div class="toolbar-group-inline">
-                            <button id="exampleBtn" class="btn btn-small btn-info" data-lang-key="btn.example">Demo</button>
+                        <div class="toolbar-divider" aria-hidden="true"></div>
+                        <div class="toolbar-group-inline toolbar-group--actions">
+                            <button id="exampleBtn" class="btn btn-small btn-accent" data-lang-key="btn.example">Demo</button>
                             <button id="historyBtn" class="btn btn-small" data-lang-key="btn.history">历史</button>
                             <button id="clearBtn" class="btn btn-small btn-danger" data-lang-key="btn.clear">清空</button>
                             <button id="copyInputBtn" class="btn btn-small" data-lang-key="btn.copy">复制</button>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -122,14 +230,18 @@
                     <textarea id="jsonInput" class="json-editor" data-lang-key="placeholder.input" placeholder="在此输入或粘贴 JSON 数据..." aria-label="JSON输入框"></textarea>
                 </div>
                 <div id="errorMessage" class="error-message" role="alert" aria-live="polite"></div>
-            </div>
+            </section>
 
-            <div class="output-section">
+            <section class="output-section panel" aria-labelledby="output-heading">
                 <div class="section-header">
-                    <h2 data-lang-key="output.title">输出结果</h2>
+                    <div class="panel-title-row">
+                        <span class="panel-badge panel-badge--output" data-lang-key="panel.output">输出</span>
+                        <h2 id="output-heading" class="panel-heading" data-lang-key="output.title">结果</h2>
+                    </div>
                     <div class="section-toolbar" role="toolbar" aria-label="输出区域工具栏">
-                        <div class="toolbar-group-inline">
-                            <button id="treeViewBtn" class="btn btn-small btn-info" data-lang-key="btn.treeView">树形编辑</button>
+                        <div class="toolbar-row">
+                            <div class="toolbar-group-inline">
+                            <button id="treeViewBtn" class="btn btn-small btn-accent" data-lang-key="btn.treeView">树形编辑</button>
                             <select id="langConvert" class="select-small" aria-label="编程语言转换">
                                 <option value="" data-lang-key="langConvert.placeholder">编程语言转换</option>
                                 <option value="java">Java</option>
@@ -143,33 +255,36 @@
                                 <option value="kotlin">Kotlin</option>
                                 <option value="php">PHP</option>
                             </select>
+                            </div>
                         </div>
-                        <div class="toolbar-group-inline">
+                        <div class="toolbar-row">
+                            <div class="toolbar-group-inline toolbar-group--settings">
                             <label class="checkbox-label-inline">
                                 <input type="checkbox" id="showLineNumbers" aria-label="显示行号">
                                 <span data-lang-key="label.lineNumbers">行号</span>
                             </label>
-                            <span class="toolbar-separator" aria-hidden="true">|</span>
-                            <span class="toolbar-label-small" data-lang-key="label.indent">空格：</span>
+                            <span class="toolbar-label-small" data-lang-key="label.indent">缩进</span>
                             <select id="indentSize" class="select-small" aria-label="缩进空格数">
                                 <option value="1">1</option>
                                 <option value="2" selected>2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                             </select>
-                            <span class="toolbar-label-small" data-lang-key="label.fontSize">字体：</span>
+                            <span class="toolbar-label-small" data-lang-key="label.fontSize">字号</span>
                             <select id="fontSize" class="select-small" aria-label="字体大小">
-                                <option value="12">12px</option>
-                                <option value="13">13px</option>
-                                <option value="14" selected>14px</option>
-                                <option value="15">15px</option>
-                                <option value="16">16px</option>
-                                <option value="18">18px</option>
-                                <option value="20">20px</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14" selected>14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="18">18</option>
+                                <option value="20">20</option>
                             </select>
-                        </div>
-                        <div class="toolbar-group-inline">
-                            <button id="copyBtn" class="btn btn-small" data-lang-key="btn.copy">复制</button>
+                            </div>
+                            <div class="toolbar-divider" aria-hidden="true"></div>
+                            <div class="toolbar-group-inline toolbar-group--actions">
+                                <button id="copyBtn" class="btn btn-small btn-primary" data-lang-key="btn.copy">复制</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -178,54 +293,70 @@
                     <textarea id="jsonOutput" class="json-editor" readonly aria-label="JSON输出框"></textarea>
                     <div id="treeView" class="tree-view" style="display: none;" role="tree" aria-label="JSON树形结构"></div>
                 </div>
-            </div>
-        </div>
+            </section>
+        </main>
 
         <aside class="info-panel" aria-label="统计信息">
             <div class="info-item">
-                <span class="info-label" data-lang-key="info.charCount">字符数：</span>
-                <span id="charCount" aria-live="polite">0</span>
+                <span class="info-label" data-lang-key="info.charCount">字符</span>
+                <span id="charCount" class="info-value" aria-live="polite">0</span>
             </div>
             <div class="info-item">
-                <span class="info-label" data-lang-key="info.lineCount">行数：</span>
-                <span id="lineCount" aria-live="polite">0</span>
+                <span class="info-label" data-lang-key="info.lineCount">行数</span>
+                <span id="lineCount" class="info-value" aria-live="polite">0</span>
             </div>
-            <div class="info-item">
-                <span class="info-label" data-lang-key="info.status">状态：</span>
+            <div class="info-item info-item--status">
+                <span class="info-label" data-lang-key="info.status">状态</span>
                 <span id="status" class="status-valid" aria-live="polite" data-lang-key="status.ready">就绪</span>
             </div>
         </aside>
         
-        <!-- 功能说明 -->
+        <!-- 功能说明：SEO 内容区块，提供自然语言描述与长尾关键词 -->
         <section class="features-section" aria-label="功能特性">
-            <h2 class="features-title" data-lang-key="features.title">JSON在线解析工具 - 功能特性</h2>
+            <h2 class="features-title" data-lang-key="features.title">功能概览</h2>
+            <p class="features-intro" data-lang-key="features.intro">
+                JSON 在线解析工具（ccjson.com）面向开发者与数据工程师，在浏览器中即可完成 JSON 格式化、压缩、语法校验、转义处理与多格式转换，无需安装插件或注册账号，数据可在本地保存。
+            </p>
             <div class="features">
-                <h3 data-lang-key="features.subtitle">核心功能</h3>
+                <h3 data-lang-key="features.subtitle">核心能力</h3>
                 <ul>
-                    <li>✅ <strong data-lang-key="features.format.name">JSON格式化</strong> - <span data-lang-key="features.format.desc">自动美化JSON数据，提高可读性，支持1-4空格缩进</span></li>
-                    <li>✅ <strong data-lang-key="features.compress.name">JSON压缩</strong> - <span data-lang-key="features.compress.desc">去除所有空格和换行，生成最紧凑的JSON格式</span></li>
-                    <li>✅ <strong data-lang-key="features.validate.name">JSON验证</strong> - <span data-lang-key="features.validate.desc">实时验证JSON语法，显示详细错误信息和位置</span></li>
-                    <li>✅ <strong data-lang-key="features.escape.name">JSON转义/反转义</strong> - <span data-lang-key="features.escape.desc">处理JSON字符串中的特殊字符转义</span></li>
-                    <li>✅ <strong data-lang-key="features.tree.name">树形编辑</strong> - <span data-lang-key="features.tree.desc">可视化JSON树形结构，支持折叠和展开节点</span></li>
-                    <li>✅ <strong data-lang-key="features.langConvert.name">编程语言转换</strong> - <span data-lang-key="features.langConvert.desc">支持将JSON转换为Java、Python、TypeScript、Go、Rust、Swift、C++、C#、Kotlin、PHP等代码</span></li>
-                    <li>✅ <strong data-lang-key="features.formatConvert.name">格式转换</strong> - <span data-lang-key="features.formatConvert.desc">支持JSON转XML、JSON转YAML、JSON转CSV等多种格式</span></li>
-                    <li>✅ <strong data-lang-key="features.unicode.name">Unicode转换</strong> - <span data-lang-key="features.unicode.desc">中文与Unicode编码互转</span></li>
-                    <li>✅ <strong data-lang-key="features.getParam.name">Get参数转换</strong> - <span data-lang-key="features.getParam.desc">JSON与URL Get参数格式互转</span></li>
-                    <li>✅ <strong data-lang-key="features.stats.name">实时统计</strong> - <span data-lang-key="features.stats.desc">显示字符数、行数和验证状态</span></li>
-                    <li>✅ <strong data-lang-key="features.history.name">历史记录</strong> - <span data-lang-key="features.history.desc">自动保存操作历史，支持7天/30天/永久存储</span></li>
-                    <li>✅ <strong data-lang-key="features.theme.name">深色主题</strong> - <span data-lang-key="features.theme.desc">支持浅色和深色主题切换</span></li>
+                    <li><strong data-lang-key="features.format.name">JSON格式化</strong> — <span data-lang-key="features.format.desc">自动美化JSON数据，提高可读性，支持1-4空格缩进</span></li>
+                    <li><strong data-lang-key="features.compress.name">JSON压缩</strong> — <span data-lang-key="features.compress.desc">去除所有空格和换行，生成最紧凑的JSON格式</span></li>
+                    <li><strong data-lang-key="features.validate.name">JSON验证</strong> — <span data-lang-key="features.validate.desc">实时验证JSON语法，显示详细错误信息和位置</span></li>
+                    <li><strong data-lang-key="features.escape.name">JSON转义/反转义</strong> — <span data-lang-key="features.escape.desc">处理JSON字符串中的特殊字符转义</span></li>
+                    <li><strong data-lang-key="features.tree.name">树形编辑</strong> — <span data-lang-key="features.tree.desc">可视化JSON树形结构，支持折叠和展开节点</span></li>
+                    <li><strong data-lang-key="features.langConvert.name">编程语言转换</strong> — <span data-lang-key="features.langConvert.desc">支持将JSON转换为Java、Python、TypeScript、Go、Rust、Swift、C++、C#、Kotlin、PHP等代码</span></li>
+                    <li><strong data-lang-key="features.formatConvert.name">格式转换</strong> — <span data-lang-key="features.formatConvert.desc">支持JSON转XML、JSON转YAML、JSON转CSV等多种格式</span></li>
+                    <li><strong data-lang-key="features.unicode.name">Unicode转换</strong> — <span data-lang-key="features.unicode.desc">中文与Unicode编码互转</span></li>
+                    <li><strong data-lang-key="features.getParam.name">Get参数转换</strong> — <span data-lang-key="features.getParam.desc">JSON与URL Get参数格式互转</span></li>
+                    <li><strong data-lang-key="features.stats.name">实时统计</strong> — <span data-lang-key="features.stats.desc">显示字符数、行数和验证状态</span></li>
+                    <li><strong data-lang-key="features.history.name">历史记录</strong> — <span data-lang-key="features.history.desc">自动保存操作历史，支持7天/30天/永久存储</span></li>
+                    <li><strong data-lang-key="features.theme.name">深色主题</strong> — <span data-lang-key="features.theme.desc">支持浅色和深色主题切换</span></li>
                 </ul>
             </div>
         </section>
 
-        <!-- 历史记录面板 -->
-        <div id="historyPanel" class="history-panel" style="display: none;">
+        <!-- 历史记录浮层 -->
+        <div id="historyBackdrop" class="history-backdrop" style="display: none;" aria-hidden="true"></div>
+        <div id="historyPanel" class="history-panel" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="historyTitle">
             <div class="history-header">
-                <h3 data-lang-key="history.title">浏览历史</h3>
-                <button id="closeHistoryBtn" class="btn-icon">✕</button>
+                <h3 id="historyTitle" data-lang-key="history.title">浏览历史</h3>
+                <button id="closeHistoryBtn" class="btn-icon btn-close" aria-label="关闭">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
             </div>
             <div id="historyList" class="history-list"></div>
         </div>
+
+        <footer class="site-footer">
+            <p class="site-footer__copy">
+                <span data-lang-key="footer.copyright">© JSON 在线解析工具</span>
+                ·
+                <a href="https://ccjson.com/" rel="home" data-lang-key="footer.home">首页</a>
+            </p>
+        </footer>
     </div>
 
     <script src="script.js"></script>

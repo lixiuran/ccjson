@@ -32,8 +32,18 @@ const historyBtn = document.getElementById('historyBtn');
 const historyPanel = document.getElementById('historyPanel');
 const historyList = document.getElementById('historyList');
 const closeHistoryBtn = document.getElementById('closeHistoryBtn');
+const historyBackdrop = document.getElementById('historyBackdrop');
 const langToggle = document.getElementById('langToggle');
 const langToggleText = document.getElementById('langToggleText');
+
+/** 统一控制历史面板与遮罩的显示状态 */
+function setHistoryPanelOpen(isOpen) {
+    historyPanel.style.display = isOpen ? 'block' : 'none';
+    if (historyBackdrop) {
+        historyBackdrop.style.display = isOpen ? 'block' : 'none';
+        historyBackdrop.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    }
+}
 
 // 状态变量
 let isTreeViewMode = false;
@@ -45,7 +55,7 @@ let currentLang = 'zh'; // 'zh' 或 'en'
 const translations = {
     zh: {
         title: 'JSON 在线解析工具',
-        subtitle: '快速解析、格式化、验证和转换 JSON 数据 - 支持JSON转XML、JSON转YAML、树形编辑、编程语言转换等功能',
+        subtitle: '快速解析、格式化、验证和转换 JSON 数据',
         'btn.format': '格式化',
         'btn.compress': '压缩',
         'btn.validate': '验证',
@@ -61,15 +71,19 @@ const translations = {
         'btn.copy': '复制',
         'btn.treeView': '树形编辑',
         'btn.treeEdit': '文本编辑',
-        'output.title': '输出结果',
+        'output.title': '结果',
+        'input.title': '源数据',
         'langConvert.placeholder': '编程语言转换',
+        'panel.input': '输入',
+        'panel.output': '输出',
+        'label.storage': '存储',
         'label.lineNumbers': '行号',
-        'label.indent': '空格：',
-        'label.fontSize': '字体：',
+        'label.indent': '缩进',
+        'label.fontSize': '字号',
         'placeholder.input': '在此输入或粘贴 JSON 数据...',
-        'info.charCount': '字符数：',
-        'info.lineCount': '行数：',
-        'info.status': '状态：',
+        'info.charCount': '字符',
+        'info.lineCount': '行数',
+        'info.status': '状态',
         'status.ready': '就绪',
         'status.valid': '有效 JSON',
         'status.error': '错误',
@@ -92,8 +106,11 @@ const translations = {
         'confirm.clear': '确定要清空所有内容吗？',
         'history.title': '浏览历史',
         'history.empty': '暂无历史记录',
-        'features.title': 'JSON在线解析工具 - 功能特性',
-        'features.subtitle': '核心功能',
+        'features.title': '功能概览',
+        'features.intro': 'JSON 在线解析工具（ccjson.com）面向开发者与数据工程师，在浏览器中即可完成 JSON 格式化、压缩、语法校验、转义处理与多格式转换，无需安装插件或注册账号，数据可在本地保存。',
+        'features.subtitle': '核心能力',
+        'footer.copyright': '© JSON 在线解析工具',
+        'footer.home': '首页',
         'features.format.name': 'JSON格式化',
         'features.format.desc': '自动美化JSON数据，提高可读性，支持1-4空格缩进',
         'features.compress.name': 'JSON压缩',
@@ -138,14 +155,18 @@ const translations = {
         'btn.treeView': 'Tree View',
         'btn.treeEdit': 'Text Edit',
         'output.title': 'Output',
+        'input.title': 'Source',
         'langConvert.placeholder': 'Language Convert',
+        'panel.input': 'Input',
+        'panel.output': 'Output',
+        'label.storage': 'Save',
         'label.lineNumbers': 'Line Numbers',
-        'label.indent': 'Indent:',
-        'label.fontSize': 'Font:',
+        'label.indent': 'Indent',
+        'label.fontSize': 'Size',
         'placeholder.input': 'Enter or paste JSON data here...',
-        'info.charCount': 'Characters:',
-        'info.lineCount': 'Lines:',
-        'info.status': 'Status:',
+        'info.charCount': 'Chars',
+        'info.lineCount': 'Lines',
+        'info.status': 'Status',
         'status.ready': 'Ready',
         'status.valid': 'Valid JSON',
         'status.error': 'Error',
@@ -168,8 +189,11 @@ const translations = {
         'confirm.clear': 'Are you sure you want to clear all content?',
         'history.title': 'History',
         'history.empty': 'No history yet',
-        'features.title': 'JSON Online Parser - Features',
-        'features.subtitle': 'Core Features',
+        'features.title': 'Overview',
+        'features.intro': 'JSON Online Parser (ccjson.com) helps developers format, compress, validate, escape and convert JSON in the browser—no install or sign-up required, with optional local storage.',
+        'features.subtitle': 'Capabilities',
+        'footer.copyright': '© JSON Online Parser',
+        'footer.home': 'Home',
         'features.format.name': 'JSON Formatting',
         'features.format.desc': 'Automatically beautify JSON data for better readability, supports 1-4 space indentation',
         'features.compress.name': 'JSON Compression',
@@ -202,6 +226,52 @@ function t(key) {
     return translations[currentLang][key] || key;
 }
 
+/** 各语言 SEO 文案，与 index.html head 中 meta 保持一致 */
+const seoMeta = {
+    zh: {
+        title: 'JSON 在线解析工具 - 免费JSON格式化、验证、转换工具 | JSON在线解析',
+        description: '免费在线 JSON 解析工具：一键格式化、压缩、校验 JSON，支持转义、Unicode、Get 参数、Dict 互转、树形编辑及 Java/Python/TypeScript 等代码生成。无需安装，浏览器即用。',
+        ogTitle: 'JSON 在线解析工具 - 免费JSON格式化、验证、转换工具',
+        ogDescription: '免费在线 JSON 解析工具：格式化、压缩、校验、转义、树形编辑与多语言代码转换，开发者必备的 JSON 在线工具。'
+    },
+    en: {
+        title: 'JSON Online Parser - Free JSON Format, Validate & Convert Tool',
+        description: 'Free online JSON parser: format, compress, validate and escape JSON. Unicode, GET params, dict conversion, tree view, and code gen for Java, Python, TypeScript, and more.',
+        ogTitle: 'JSON Online Parser - Free JSON Format, Validate & Convert Tool',
+        ogDescription: 'Free online JSON tools for formatting, validation, compression, escaping, tree editing, and multi-language code generation.'
+    }
+};
+
+/** 同步 title、description、Open Graph、Twitter 等 SEO 标签 */
+function updateSeoMeta() {
+    const meta = seoMeta[currentLang] || seoMeta.zh;
+    document.title = meta.title;
+
+    const descEl = document.getElementById('metaDescription');
+    if (descEl) descEl.setAttribute('content', meta.description);
+
+    const ogTitle = document.getElementById('ogTitle');
+    const ogDesc = document.getElementById('ogDescription');
+    if (ogTitle) ogTitle.setAttribute('content', meta.ogTitle);
+    if (ogDesc) ogDesc.setAttribute('content', meta.ogDescription);
+
+    const twTitle = document.getElementById('twitterTitle');
+    const twDesc = document.getElementById('twitterDescription');
+    if (twTitle) twTitle.setAttribute('content', meta.ogTitle);
+    if (twDesc) twDesc.setAttribute('content', meta.ogDescription);
+}
+
+/** 将当前语言写入 URL（?lang=en），便于 hreflang 与分享链接 */
+function syncLangToUrl() {
+    const url = new URL(window.location.href);
+    if (currentLang === 'en') {
+        url.searchParams.set('lang', 'en');
+    } else {
+        url.searchParams.delete('lang');
+    }
+    window.history.replaceState({}, '', url);
+}
+
 // 应用语言
 function applyLanguage() {
     // 更新所有带有 data-lang-key 的元素
@@ -222,7 +292,7 @@ function applyLanguage() {
         } else if (element.tagName === 'STRONG' || element.tagName === 'SPAN') {
             // Strong 和 Span 直接更新文本
             element.textContent = translation;
-        } else if (element.tagName === 'BUTTON' || element.tagName === 'H1' || element.tagName === 'H2' || element.tagName === 'H3' || element.tagName === 'P') {
+        } else if (element.tagName === 'A' || element.tagName === 'BUTTON' || element.tagName === 'H1' || element.tagName === 'H2' || element.tagName === 'H3' || element.tagName === 'P') {
             element.textContent = translation;
         } else {
             element.textContent = translation;
@@ -234,24 +304,23 @@ function applyLanguage() {
         langToggleText.textContent = currentLang === 'zh' ? 'EN' : '中文';
     }
     
-    // 更新文档语言
+    // 更新文档语言与 SEO 相关标签
     document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
-    
-    // 更新title标签
-    if (currentLang === 'zh') {
-        document.title = 'JSON 在线解析工具 - 免费JSON格式化、验证、转换工具 | JSON在线解析';
-    } else {
-        document.title = 'JSON Online Parser - Free JSON Format, Validate & Convert Tool';
-    }
-    
+    updateSeoMeta();
+    syncLangToUrl();
+
     // 保存语言选择
     localStorage.setItem('jsonToolLanguage', currentLang);
 }
 
-// 初始化语言
+// 初始化语言（优先 URL ?lang=，其次本地存储）
 function initLanguage() {
-    const savedLang = localStorage.getItem('jsonToolLanguage') || 'zh';
-    currentLang = savedLang;
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    if (urlLang === 'en' || urlLang === 'zh') {
+        currentLang = urlLang;
+    } else {
+        currentLang = localStorage.getItem('jsonToolLanguage') || 'zh';
+    }
     applyLanguage();
 }
 
@@ -466,7 +535,7 @@ function loadHistory() {
             jsonInput.value = item.content;
             updateStats();
             updateLineNumbers();
-            historyPanel.style.display = 'none';
+            setHistoryPanelOpen(false);
             formatJSON();
         });
         
@@ -476,12 +545,16 @@ function loadHistory() {
 
 historyBtn.addEventListener('click', () => {
     loadHistory();
-    historyPanel.style.display = 'block';
+    setHistoryPanelOpen(true);
 });
 
 closeHistoryBtn.addEventListener('click', () => {
-    historyPanel.style.display = 'none';
+    setHistoryPanelOpen(false);
 });
+
+if (historyBackdrop) {
+    historyBackdrop.addEventListener('click', () => setHistoryPanelOpen(false));
+}
 
 // 行号功能
 function updateLineNumbers() {
